@@ -33,8 +33,12 @@ const ProductList = () => {
               </div>
 
               <footer className="card-footer">
-                <a className="card-footer-item">Edit</a>
-                <a className="card-footer-item">Delete</a>
+                <a href="#/" className="card-footer-item">
+                  Edit
+                </a>
+                <a href="#/" className="card-footer-item">
+                  Delete
+                </a>
               </footer>
             </div>
           </div>
