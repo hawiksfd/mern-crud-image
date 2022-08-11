@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link  } from "react-router-dom";
+
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -13,8 +15,18 @@ const ProductList = () => {
     setProducts(response.data);
   };
 
+  const deleteProduct= async (productId) => {
+    try {
+      await axios.delete(`http://localhost:5000/products/${productId}`);
+      getProducts();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="container mt-5">
+        <Link to="add" className="button is-success">Add New</Link>
       <div className="columns is-multiline mt-2">
         {products.map((product) => (
           <div className="column is-one-quarter" key={product.id}>
@@ -33,10 +45,10 @@ const ProductList = () => {
               </div>
 
               <footer className="card-footer">
-                <a href="#/" className="card-footer-item">
+                <Link to={`edit/${product.id}`} className="card-footer-item">
                   Edit
-                </a>
-                <a href="#/" className="card-footer-item">
+                </Link>
+                <a href="/" onClick={()=> deleteProduct(product.id)} className="card-footer-item">
                   Delete
                 </a>
               </footer>
